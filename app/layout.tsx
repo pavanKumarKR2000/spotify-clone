@@ -1,10 +1,11 @@
 import Sidebar from "@/components/Sidebar";
 import "./globals.css";
 import type { Metadata } from "next";
-import { Lexend_Deca } from "next/font/google";
+import { Rubik } from "next/font/google";
 import SupabaseProvider from "@/providers/SupabaseProvider";
+import UserProvider from "@/providers/UserProvider";
 
-const font = Lexend_Deca({ subsets: ["latin"] });
+const font = Rubik({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Spotify clone",
@@ -20,7 +21,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={font.className}>
         <SupabaseProvider>
-          <Sidebar>{children}</Sidebar>
+          <UserProvider>
+            <Sidebar>{children}</Sidebar>
+          </UserProvider>
         </SupabaseProvider>
       </body>
     </html>
