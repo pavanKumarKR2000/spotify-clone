@@ -3,9 +3,18 @@
 import React from "react";
 import { TbPlaylist } from "react-icons/tb";
 import { AiOutlinePlus } from "react-icons/ai";
+import useAuthModal from "@/hooks/useAuthModal";
+import { useUser } from "@/hooks/useUser";
 
 const Library = () => {
-  const onClickHandler = () => {};
+  const { onOpen } = useAuthModal();
+  const { user } = useUser();
+
+  const onClickHandler = () => {
+    if (!user) {
+      onOpen();
+    }
+  };
 
   return (
     <div className="flex flex-col">
