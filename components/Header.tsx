@@ -8,6 +8,9 @@ import { HiHome } from "react-icons/hi";
 import { BiSearch } from "react-icons/bi";
 import Button from "./Button";
 import useAuthModal from "@/hooks/useAuthModal";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useUser } from "@/hooks/useUser";
+import { FaUserAlt } from "react-icons/fa";
 
 interface HeaderProps {
   children: React.ReactNode;
@@ -17,6 +20,19 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ children, className }) => {
   const router = useRouter();
   const { onOpen } = useAuthModal();
+  const supabaseClient = useSupabaseClient();
+  const { user } = useUser();
+
+  const handleLogout = async () => {
+    const { error } = await supabaseClient.auth.signOut();
+
+    //reset any playing songs
+    router.refresh();
+
+    if (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <header
@@ -53,14 +69,36 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
         {/** column-3 */}
 
         <div className="flex items-center justify-between gap-x-4">
-          <div>
-            <Button onClick={onOpen}>Sign up</Button>
-          </div>
-          <div>
-            <Button onClick={onOpen} className="bg-white">
-              Log in
-            </Button>
-          </div>
+          {user ? (
+            <>
+              <div>
+                <Button className="bg-white px-6 py-2" onClick={handleLogout}>
+                  Log out
+                </Button>
+              </div>
+              <div>
+                <Button
+                  className="bg-white"
+                  onClick={() => router.push("/account")}
+                >
+                  <FaUserAlt />
+                </Button>
+              </div>
+            </>
+          ) : (
+            <>
+              <div>
+                <Button onClick={onOpen} className="px-6 py-2">
+                  Sign up
+                </Button>
+              </div>
+              <div>
+                <Button onClick={onOpen} className="bg-white px-6 py-2">
+                  Log in
+                </Button>
+              </div>
+            </>
+          )}
         </div>
       </div>
       {children}
