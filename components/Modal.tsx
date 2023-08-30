@@ -29,10 +29,8 @@ const Modal: React.FC<ModalProps> = ({
             {description}
           </Dialog.Description>
           <div>{children}</div>
-          <Dialog.Close>
-            <button className="text-neutral-400 hover:text-white absolute top-[10px] right-[10px] inline-flex h-[25px] w-[25px] appearance-none items-center justify-center rounded-full focus:outline-none">
-              <IoMdClose />
-            </button>
+          <Dialog.Close className="text-neutral-400 hover:text-white absolute top-[10px] right-[10px] inline-flex h-[25px] w-[25px] appearance-none items-center justify-center rounded-full focus:outline-none">
+            <IoMdClose />
           </Dialog.Close>
         </Dialog.Content>
       </Dialog.Portal>
