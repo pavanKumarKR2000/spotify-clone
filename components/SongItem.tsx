@@ -1,6 +1,8 @@
 import useLoadImage from "@/hooks/useLoadImage";
 import { Song } from "@/types";
+import Image from "next/image";
 import React from "react";
+import PlayButton from "./PlayButton";
 
 interface SongItemProps {
   onClick: (id: string) => void;
@@ -15,7 +17,23 @@ const SongItem: React.FC<SongItemProps> = ({ onClick, data }) => {
       onClick={() => onClick(data.id)}
       className="relative group flex flex-col items-center justify-center rounded-md overflow-hidden gap-y-4 bg-neutral-400/5 cursor-pointer hover:bg-neutral-400/10 transition p-3"
     >
-      <div className="relative aspect-square w-full h-full rounded-md overflow-hidden"></div>
+      <div className="relative aspect-square w-full h-full rounded-md overflow-hidden">
+        <Image
+          src={imagePath || "/images/liked.png"}
+          className="object-cover"
+          fill
+          alt="image"
+        />
+      </div>
+      <div className="flex flex-col  items-start w-full pt-4 ">
+        <p className="font-semibold truncate w-full">{data.title}</p>
+        <p className="font-sm w-full pb-2 text-neutral-400 truncate">
+          By {data.author}
+        </p>
+      </div>
+      <div className="absolute bottom-24 right-5">
+        <PlayButton />
+      </div>
     </div>
   );
 };
