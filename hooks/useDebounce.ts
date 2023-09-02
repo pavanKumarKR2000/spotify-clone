@@ -8,12 +8,8 @@ const useDebounce = <T>(value: T, delay?: number): T => {
       setDebouncedValue(value);
     }, delay || 500);
 
-    console.log("inside");
-
     return () => clearTimeout(timer);
   }, [value, delay]);
-
-  console.log("outside");
 
   return debouncedValue;
 };
