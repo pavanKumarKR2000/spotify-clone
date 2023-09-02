@@ -8,6 +8,8 @@ interface SearchPageProps {
   searchParams: { title: string };
 }
 
+export const revalidate = 0;
+
 const SearchPage = async ({ searchParams }: SearchPageProps) => {
   const songs = await getSongsByTitle(searchParams.title);
 
