@@ -45,6 +45,7 @@ const Slider: React.FC<SlideProps> = ({ value = 1, onChange }) => {
             bg-white 
             rounded-full 
             h-full
+            cursor-pointer
           "
         />
       </RadixSlider.Track>

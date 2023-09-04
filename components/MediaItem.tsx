@@ -6,7 +6,7 @@ import Image from "next/image";
 import React from "react";
 
 interface MediaItemProps {
-  onClick: (id: string) => void;
+  onClick?: (id: string) => void;
   data: Song;
 }
 
